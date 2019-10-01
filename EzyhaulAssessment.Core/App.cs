@@ -13,6 +13,7 @@ namespace EzyhaulAssessment.Core
 		public override void Initialize()
 		{
 			Mvx.IoCProvider.RegisterType<ICalculationService, CalculationService>();
+			Mvx.IoCProvider.RegisterType<IServerApiService, ServerApiService>();
 
 			RegisterAppStart<TipViewModel>();
 		}
