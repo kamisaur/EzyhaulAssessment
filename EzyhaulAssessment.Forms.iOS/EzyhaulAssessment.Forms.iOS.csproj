@@ -65,6 +65,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Entitlements.plist" />
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\Fonts\materialdesignicons.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -130,9 +131,7 @@
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\EzyhaulAssessment.Core\EzyhaulAssessment.Core.csproj">
       <Project>{046ddd72-f179-43b3-9d4d-0f64aea00267}</Project>

@@ -2,5 +2,32 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EzyhaulAssessment.Forms.UI.FormsApp">
-    <Application.Resources />
+    <Application.Resources>
+
+
+        <OnPlatform x:Key="MaterialFontFamily"
+                    x:TypeArguments="x:String"
+                    Android="materialdesignicons.ttf#Material Design Icons"
+                    iOS="Material Design Icons" />
+
+
+        <x:String x:Key="TruckIcon">&#xf53d;</x:String>
+        <x:String x:Key="CalendarClockIcon">&#xf0f0;</x:String>
+        <x:String x:Key="BoxIcon">&#xf3d7;</x:String>
+        <x:String x:Key="LocationIcon">&#xf7d8;</x:String>
+        <x:String x:Key="ThreeDotsIcon">&#xf1d8;</x:String>
+        <x:String x:Key="CircleIcon">&#xf12f;</x:String>
+
+        <x:String x:Key="BriefcaseIcon">&#xf813;</x:String>
+        <x:String x:Key="MessageIcon">&#xf36a;</x:String>
+        <x:String x:Key="SettingsIcon">&#xf8ba;</x:String>
+        <x:String x:Key="FilterIcon">&#xf233;</x:String>
+
+
+        <Style x:Key="IconLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource MaterialFontFamily}" />
+        </Style>
+
+
+    </Application.Resources>
 </Application>

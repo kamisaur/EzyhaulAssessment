@@ -15,7 +15,8 @@ namespace EzyhaulAssessment.Core
 			Mvx.IoCProvider.RegisterType<ICalculationService, CalculationService>();
 			Mvx.IoCProvider.RegisterType<IServerApiService, ServerApiService>();
 
-			RegisterAppStart<TipViewModel>();
+			//RegisterAppStart<TipViewModel>();
+			RegisterAppStart<TabsRootViewModel>();
 		}
 	}
 }

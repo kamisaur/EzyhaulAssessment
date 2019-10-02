@@ -27,6 +27,60 @@
                    mvx:Bi.nd="FontSize Height; Text Tip; "
                    BackgroundColor="Green" />
 
+            <StackLayout>
+                <Label Text="{StaticResource TruckIcon}"
+                       FontSize="20"
+                       TextColor="Gray"
+                       Style="{StaticResource IconLabelStyle}" />
+
+                <Label Text="{StaticResource CalendarClockIcon}"
+                       FontSize="20"
+                       TextColor="Gray"
+                       Style="{StaticResource IconLabelStyle}" />
+
+                <Label Text="{StaticResource BoxIcon}"
+                       FontSize="20"
+                       TextColor="Gray"
+                       Style="{StaticResource IconLabelStyle}" />
+
+                <Label Text="{StaticResource LocationIcon}"
+                       FontSize="20"
+                       TextColor="Gray"
+                       Style="{StaticResource IconLabelStyle}" />
+
+                <Label Text="{StaticResource ThreeDotsIcon}"
+                       FontSize="30"
+                       TextColor="Gray"
+                       Style="{StaticResource IconLabelStyle}" />
+
+
+                <Label Text="{StaticResource CircleIcon}"
+                       FontSize="20"
+                       TextColor="Gray"
+                       Style="{StaticResource IconLabelStyle}" />
+
+
+                <Label Text="{StaticResource BriefcaseIcon}"
+                       FontSize="20"
+                       TextColor="Gray"
+                       Style="{StaticResource IconLabelStyle}" />
+
+                <Label Text="{StaticResource MessageIcon}"
+                       FontSize="20"
+                       TextColor="Gray"
+                       Style="{StaticResource IconLabelStyle}" />
+
+                <Label Text="{StaticResource SettingsIcon}"
+                       FontSize="20"
+                       TextColor="Gray"
+                       Style="{StaticResource IconLabelStyle}" />
+
+                <Label Text="{StaticResource FilterIcon}"
+                       FontSize="20"
+                       TextColor="Gray"
+                       Style="{StaticResource IconLabelStyle}" />
+            </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 

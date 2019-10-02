@@ -1,4 +1,5 @@
-﻿using Refit;
+﻿using EzyhaulAssessment.Core.Models;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +16,7 @@ namespace EzyhaulAssessment.Core.Services
 			serverApiService = RestService.For<IServerApiService>("https://carrier-app-api.azurewebsites.net");
 		}
 
-		public async Task<string> GetJobInfo()
+		public async Task<List<OfferDetail>> GetJobInfo()
 		{
 			return await serverApiService.GetJobInfo();
 		}
