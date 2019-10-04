@@ -7,17 +7,69 @@
                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                      xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
                      xmlns:viewModels="clr-namespace:EzyhaulAssessment.Core.ViewModels;assembly=EzyhaulAssessment.Core"
+                     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+                     xmlns:iosspecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                     android:TabbedPage.ToolbarPlacement="Bottom"
                      mc:Ignorable="d"
-                     x:Class="EzyhaulAssessment.Forms.UI.Pages.TabsRootPage">
+                     x:Class="EzyhaulAssessment.Forms.UI.Pages.TabsRootPage"
+                     Title="Jobs"
+                     android:TabbedPage.BarItemColor="Gray"
+                     android:TabbedPage.BarSelectedItemColor="{StaticResource PrimaryColor}">
+
+    <views:MvxTabbedPage.Resources>
 
 
-    <!--<views:MvxTabbedPage.Content>
-        <StackLayout>
-            <Label Text="Root Tab"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </views:MvxTabbedPage.Content>-->
 
+
+        <OnPlatform x:Key="navBarMargin"
+                    x:TypeArguments="Thickness"
+                    iOS="10"
+                    Android="0,10,10,10" />
+
+
+    </views:MvxTabbedPage.Resources>
+
+
+    <NavigationPage.TitleView>
+
+
+
+
+        <Grid Margin="{StaticResource navBarMargin}">
+
+            <Label Text="Total 20"
+                   TextColor="Gray"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   VerticalTextAlignment="Center" />
+
+            <Label Text="Jobs"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Center"
+                   VerticalTextAlignment="Center" />
+
+            <Label Text="{StaticResource FilterIcon}"
+                   FontSize="26"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   VerticalTextAlignment="Center"
+                   TextColor="{StaticResource PrimaryColor}"
+                   Style="{StaticResource IconLabelStyle}" />
+
+        </Grid>
+    </NavigationPage.TitleView>
+
+
+    <views:MvxTabbedPage.ToolbarItems>
+        <!--<ToolbarItem Text="Jobs"
+                     Priority="0"
+                     Order="Primary">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="{StaticResource FilterIcon}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>-->
+    </views:MvxTabbedPage.ToolbarItems>
 
 </views:MvxTabbedPage>

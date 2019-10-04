@@ -24,6 +24,13 @@
         <x:String x:Key="FilterIcon">&#xf233;</x:String>
 
 
+        <Color x:Key="PrimaryColor">#FFA544</Color>
+        <Color x:Key="SecondaryColor">#FF8400</Color>
+
+
+
+
+
         <Style x:Key="IconLabelStyle" TargetType="Label">
             <Setter Property="FontFamily" Value="{StaticResource MaterialFontFamily}" />
         </Style>

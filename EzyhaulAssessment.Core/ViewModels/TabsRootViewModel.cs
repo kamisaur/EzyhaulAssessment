@@ -14,24 +14,23 @@ namespace EzyhaulAssessment.Core.ViewModels
 		public TabsRootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
 		{
 			ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
-			//ShowTabsRootBCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootBViewModel>());
 		}
 
 		public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
 
-		public IMvxAsyncCommand ShowTabsRootBCommand { get; private set; }
 
 		private async Task ShowInitialViewModels()
 		{
 			var tasks = new List<Task>();
-			tasks.Add(NavigationService.Navigate<Tab1ViewModel, string>("test"));
-			tasks.Add(NavigationService.Navigate<Tab2ViewModel>());
-			tasks.Add(NavigationService.Navigate<Tab3ViewModel>());
+			tasks.Add(NavigationService.Navigate<JobsViewModel>());
+			tasks.Add(NavigationService.Navigate<ContactDispatchViewModel>());
+			tasks.Add(NavigationService.Navigate<SettingsViewModel>());
 			await Task.WhenAll(tasks);
 		}
 
-		private int _itemIndex;
 
+
+		private int _itemIndex;
 		public int ItemIndex
 		{
 			get { return _itemIndex; }

@@ -13,24 +13,32 @@ namespace EzyhaulAssessment.Forms.iOS
 	{
         // class-level declarations
 
-        public override UIWindow Window
-        {
-            get;
-            set;
-        }
+        //public override UIWindow Window
+        //{
+        //    get;
+        //    set;
+        //}
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            // create a new window instance based on the screen size
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
-            Window.RootViewController = new UIViewController();
+			//// create a new window instance based on the screen size
+			//Window = new UIWindow(UIScreen.MainScreen.Bounds);
+			//Window.RootViewController = new UIViewController();
 
-            // make the window visible
-            Window.MakeKeyAndVisible();
+			//// make the window visible
+			//Window.MakeKeyAndVisible();
 
-            //return true; 
-			 return base.FinishedLaunching(application, launchOptions);
+
+			//# FFA544
+			//UITabBar.Appearance.SelectedImageTintColor = UIColor.FromRGB(255, 165, 68);
+
+			UINavigationBar.Appearance.TintColor = UIColor.FromRGB(255, 165, 68);
+
+
+			//return true; 
+			return base.FinishedLaunching(application, launchOptions);
 		}
+
 
         public override void OnResignActivation(UIApplication application)
         {

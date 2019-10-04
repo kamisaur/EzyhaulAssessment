@@ -11,10 +11,8 @@ using Android.Content.PM;
 
 namespace EzyhaulAssessment.Forms.Droid
 {
-		//Icon = "@drawable/icon",
 
     [Activity(
-		Label = "TipCalc.Forms.Droid",
 		Theme = "@style/MyTheme",
 		MainLauncher = true,
 		ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,

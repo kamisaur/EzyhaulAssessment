@@ -18,6 +18,7 @@ namespace EzyhaulAssessment.Forms.UI.Pages
 		public TabsRootPage()
 		{
 			InitializeComponent();
+
 		}
 
 		private bool _firstTime = true;
@@ -27,7 +28,6 @@ namespace EzyhaulAssessment.Forms.UI.Pages
 			base.OnAppearing();
 			if (_firstTime)
 			{
-				//ViewModel.ShowInitialViewModelsCommand.Execute();
 				ViewModel.ShowInitialViewModelsCommand.ExecuteAsync(null);
 				_firstTime = false;
 			}
