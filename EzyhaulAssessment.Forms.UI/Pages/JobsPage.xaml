@@ -50,7 +50,7 @@
     </views:MvxContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="0">
 
             <ListView ItemsSource="{Binding OfferDetails}"
                       ItemSelected="ListView_ItemSelected"
@@ -63,7 +63,7 @@
                         <ViewCell>
                             <Grid>
                                 <Frame HasShadow="True"
-                                       Margin="20,2"
+                                       Margin="15,4"
                                        BackgroundColor="White"
                                        Padding="0"
                                        IsClippedToBounds="True"
@@ -71,11 +71,11 @@
                                     <Grid RowSpacing="0">
                                         <!--#region RowDefinitions (5)-->
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="30" />
-                                            <RowDefinition Height="30" />
-                                            <RowDefinition Height="30" />
-                                            <RowDefinition Height="30" />
-                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="32" />
+                                            <RowDefinition Height="32" />
+                                            <RowDefinition Height="32" />
+                                            <RowDefinition Height="32" />
+                                            <RowDefinition Height="32" />
                                         </Grid.RowDefinitions>
                                         <!--#endregion-->
 
@@ -102,7 +102,7 @@
                                                 <FormattedString>
                                                     <Span Text="{StaticResource CalendarClockIcon}" Style="{StaticResource IconSpanStyle}" />
                                                     <Span Text="  " FontSize="14" />
-                                                    <Span Text="{Binding schedule}" Style="{StaticResource TextSpanStyle}" />
+                                                    <Span mvx:Bi.nd="Text TimeStampToDateTime(schedule, .)" Style="{StaticResource TextSpanStyle}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
@@ -170,6 +170,21 @@
                                             </CollectionView.ItemsLayout>
 
                                         </CollectionView>-->
+
+                                        <StackLayout Grid.Row="4"
+                                                     Orientation="Horizontal"
+                                                     Spacing="0">
+                                            <Grid HorizontalOptions="FillAndExpand" />
+                                            <BoxView WidthRequest="1"
+                                                     HorizontalOptions="Center"
+                                                     BackgroundColor="{StaticResource SecondaryTextColor}" />
+                                            <Label Text="{StaticResource ThreeDotsIcon}"
+                                                   TextColor="{StaticResource PrimaryColor}"
+                                                   FontSize="20"
+                                                   VerticalTextAlignment="Center"
+                                                   Margin="8,5"
+                                                   Style="{StaticResource IconLabelStyle}" />
+                                        </StackLayout>
 
 
                                         <!--#region LeftOrangeBar-->
