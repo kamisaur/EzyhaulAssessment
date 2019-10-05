@@ -8,6 +8,7 @@
     <PackageReference Include="MvvmCross.Forms" Version="6.4.1" />
     <PackageReference Include="refit" Version="4.7.51" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
+    <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling" Version="1.0.0-preview2" />
   </ItemGroup>
 
   <ItemGroup>

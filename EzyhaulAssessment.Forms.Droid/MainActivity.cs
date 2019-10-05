@@ -23,10 +23,10 @@ namespace EzyhaulAssessment.Forms.Droid
         {
 			TabLayoutResource = Resource.Layout.Tabbar;
 			ToolbarResource = Resource.Layout.Toolbar;
+            Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
 
-			base.OnCreate(savedInstanceState);
+            base.OnCreate(savedInstanceState);
 
-            //Forms.SetFlags("CollectionView_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 			// Set our view from the "main" layout resource
 			//SetContentView(Resource.Layout.activity_main);

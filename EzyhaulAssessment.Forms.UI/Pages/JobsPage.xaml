@@ -7,6 +7,7 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:scroll="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
                       mc:Ignorable="d"
                       x:Class="EzyhaulAssessment.Forms.UI.Pages.JobsPage"
                       Title="Jobs">
@@ -32,6 +33,7 @@
             <Setter Property="Margin" Value="20,6" />
             <Setter Property="VerticalTextAlignment" Value="Center" />
             <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Grid.ColumnSpan" Value="2" />
         </Style>
 
         <Style x:Key="IconSpanStyle" TargetType="Label">
@@ -46,17 +48,49 @@
         </Style>
 
 
+        <Style x:Key="LocationIconChipStyle"
+               TargetType="Label"
+               BasedOn="{StaticResource IconLabelStyle}">
+            <Setter Property="VerticalOptions" Value="Center" />
+
+            <Style.Triggers>
+                <DataTrigger TargetType="Label"
+                             Binding="{Binding type}"
+                             Value="PCK">
+                    <Setter Property="TextColor" Value="{StaticResource PickupLocationColor}" />
+                </DataTrigger>
+                <DataTrigger TargetType="Label"
+                             Binding="{Binding type}"
+                             Value="DEL">
+                    <Setter Property="TextColor" Value="{StaticResource DeliveryLocationColor}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="ChipFrameStyle" TargetType="Frame">
+            <Setter Property="Margin" Value="3,0" />
+            <Setter Property="Padding" Value="8,1" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HeightRequest" Value="20" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="BackgroundColor" Value="{StaticResource LocationChipColor}" />
+        </Style>
 
     </views:MvxContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout Margin="0">
 
-            <ListView ItemsSource="{Binding OfferDetails}"
+            <ListView ItemsSource="{Binding Items}"
                       ItemSelected="ListView_ItemSelected"
                       HasUnevenRows="True"
                       SeparatorVisibility="None"
                       CachingStrategy="RecycleElement">
+                <ListView.Behaviors>
+                    <scroll:InfiniteScrollBehavior />
+                </ListView.Behaviors>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -68,15 +102,21 @@
                                        Padding="0"
                                        IsClippedToBounds="True"
                                        CornerRadius="7">
-                                    <Grid RowSpacing="0">
+                                    <Grid RowSpacing="0" ColumnSpacing="0">
                                         <!--#region RowDefinitions (5)-->
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="32" />
                                             <RowDefinition Height="32" />
                                             <RowDefinition Height="32" />
                                             <RowDefinition Height="32" />
-                                            <RowDefinition Height="32" />
+                                            <RowDefinition Height="38" />
                                         </Grid.RowDefinitions>
+                                        <!--#endregion-->
+                                        <!--#region ColumnDefinitions (2)-->
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="40" />
+                                        </Grid.ColumnDefinitions>
                                         <!--#endregion-->
 
                                         <!--#region Truck-->
@@ -147,6 +187,7 @@
 
                                         <!--#region OrderId-->
                                         <Label Grid.Row="3"
+                                               Grid.ColumnSpan="2"
                                                Text="# S180921-0128"
                                                HorizontalOptions="End"
                                                VerticalOptions="Center"
@@ -156,35 +197,68 @@
                                         <!--#endregion-->
 
 
+                                        <!--#region HorizontalSeparator-->
                                         <BoxView Grid.Row="4"
                                                  BackgroundColor="{StaticResource SecondaryTextColor}"
                                                  VerticalOptions="Start"
+                                                 Grid.ColumnSpan="2"
                                                  HorizontalOptions="FillAndExpand"
                                                  HeightRequest="1" />
+                                        <!--#endregion-->
 
-                                        <!--<CollectionView Grid.Row="4"
-                                                        HorizontalOptions="Center"
-                                                        ItemsSource="{StaticResource array}">
+
+                                        <!--#region ChipLocation-->
+                                        <CollectionView Grid.Row="4"
+                                                        Margin="20,0,0,0"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        ItemsSource="{Binding locations}">
                                             <CollectionView.ItemsLayout>
-                                                <ListItemsLayout Orientation="Vertical" />
+                                                <ListItemsLayout Orientation="Horizontal" />
                                             </CollectionView.ItemsLayout>
 
-                                        </CollectionView>-->
 
-                                        <StackLayout Grid.Row="4"
-                                                     Orientation="Horizontal"
-                                                     Spacing="0">
-                                            <Grid HorizontalOptions="FillAndExpand" />
-                                            <BoxView WidthRequest="1"
-                                                     HorizontalOptions="Center"
-                                                     BackgroundColor="{StaticResource SecondaryTextColor}" />
-                                            <Label Text="{StaticResource ThreeDotsIcon}"
-                                                   TextColor="{StaticResource PrimaryColor}"
-                                                   FontSize="20"
-                                                   VerticalTextAlignment="Center"
-                                                   Margin="8,5"
-                                                   Style="{StaticResource IconLabelStyle}" />
-                                        </StackLayout>
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Frame Style="{StaticResource ChipFrameStyle}">
+                                                            <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+
+                                                                <Label Text="{StaticResource LocationFillIcon}" Style="{StaticResource LocationIconChipStyle}" />
+
+                                                                <Label VerticalOptions="Center" Text="{Binding city}" />
+
+                                                            </StackLayout>
+                                                        </Frame>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+
+                                        </CollectionView>
+                                        <!--#endregion-->
+
+
+                                        <!--#region VerticalSeparator-->
+                                        <BoxView Grid.Row="4"
+                                                 WidthRequest="1"
+                                                 HorizontalOptions="End"
+                                                 BackgroundColor="{StaticResource SecondaryTextColor}" />
+                                        <!--#endregion-->
+
+
+                                        <!--#region ThreeDots-->
+                                        <Label Grid.Row="4"
+                                               Grid.Column="1"
+                                               Text="{StaticResource ThreeDotsIcon}"
+                                               TextColor="{StaticResource PrimaryColor}"
+                                               FontSize="20"
+                                               VerticalTextAlignment="Center"
+                                               HorizontalOptions="Center"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalOptions="Center"
+                                               Margin="8,5"
+                                               Style="{StaticResource IconLabelStyle}" />
+                                        <!--#endregion-->
+
 
 
                                         <!--#region LeftOrangeBar-->
@@ -197,6 +271,7 @@
 
                                         <!--#region NotificationCircle-->
                                         <Label Text="{StaticResource CircleIcon}"
+                                               Grid.ColumnSpan="2"
                                                HorizontalOptions="End"
                                                VerticalOptions="Start"
                                                Margin="5"

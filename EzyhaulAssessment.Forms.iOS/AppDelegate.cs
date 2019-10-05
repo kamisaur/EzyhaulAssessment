@@ -33,8 +33,7 @@ namespace EzyhaulAssessment.Forms.iOS
 			//UITabBar.Appearance.SelectedImageTintColor = UIColor.FromRGB(255, 165, 68);
 
 			UINavigationBar.Appearance.TintColor = UIColor.FromRGB(255, 165, 68);
-
-           // Forms.SetFlags("CollectionView_Experimental");
+            Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
 
 
             //return true; 

@@ -111,6 +111,9 @@
     <PackageReference Include="Xamarin.Forms">
       <Version>4.2.0.815419</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling">
+      <Version>1.0.0-preview2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EzyhaulAssessment.Core\EzyhaulAssessment.Core.csproj">
