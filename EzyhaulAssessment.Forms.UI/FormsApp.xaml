@@ -5,12 +5,15 @@
     <Application.Resources>
 
 
+        <!--#region Fonts-->
         <OnPlatform x:Key="MaterialFontFamily"
                     x:TypeArguments="x:String"
                     Android="materialdesignicons.ttf#Material Design Icons"
                     iOS="Material Design Icons" />
+        <!--#endregion-->
 
 
+        <!--#region Icons-->
         <x:String x:Key="TruckIcon">&#xf53d;</x:String>
         <x:String x:Key="CalendarClockIcon">&#xf0f0;</x:String>
         <x:String x:Key="BoxIcon">&#xf3d7;</x:String>
@@ -24,16 +27,29 @@
         <x:String x:Key="FilterIcon">&#xf233;</x:String>
 
 
+        <!--#endregion-->
+
+
+        <!--#region Colors-->
         <Color x:Key="PrimaryColor">#FFA544</Color>
         <Color x:Key="SecondaryColor">#FF8400</Color>
 
+        <Color x:Key="PrimaryTextColor">#555555</Color>
+        <Color x:Key="SecondaryTextColor">#E0E0E0</Color>
+
+        <Color x:Key="PickupLocationColor">#FF2E2E</Color>
+        <Color x:Key="DeliveryLocationColor">#4EE817</Color>
+        <Color x:Key="LocationChipColor">#F0F0F0</Color>
+
+        <Color x:Key="IconColor">#ADADAD</Color>
+        <!--#endregion-->
 
 
-
-
+        <!--#region Styles-->
         <Style x:Key="IconLabelStyle" TargetType="Label">
             <Setter Property="FontFamily" Value="{StaticResource MaterialFontFamily}" />
         </Style>
+        <!--#endregion-->
 
 
     </Application.Resources>

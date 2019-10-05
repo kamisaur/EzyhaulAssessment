@@ -20,5 +20,13 @@ namespace EzyhaulAssessment.Forms.UI.Pages
 			InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, true);
 		}
-	}
+
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var lv = sender as ListView;
+            lv.SelectedItem = null;
+        }
+
+
+    }
 }

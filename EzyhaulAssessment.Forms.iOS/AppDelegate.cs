@@ -34,9 +34,11 @@ namespace EzyhaulAssessment.Forms.iOS
 
 			UINavigationBar.Appearance.TintColor = UIColor.FromRGB(255, 165, 68);
 
+           // Forms.SetFlags("CollectionView_Experimental");
 
-			//return true; 
-			return base.FinishedLaunching(application, launchOptions);
+
+            //return true; 
+            return base.FinishedLaunching(application, launchOptions);
 		}
 
 

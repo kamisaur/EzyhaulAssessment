@@ -15,17 +15,189 @@
         <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="{StaticResource BriefcaseIcon}" />
     </views:MvxContentPage.IconImageSource>
 
+    <views:MvxContentPage.Resources>
+        <x:Array x:Key="array" Type="{x:Type x:String}">
+            <x:String>mono</x:String>
+            <x:String>monodroid</x:String>
+            <x:String>monotouch</x:String>
+            <x:String>monorail</x:String>
+            <x:String>monodevelop</x:String>
+            <x:String>monotone</x:String>
+            <x:String>monopoly</x:String>
+            <x:String>monomodal</x:String>
+            <x:String>mononucleosis</x:String>
+        </x:Array>
+
+        <Style x:Key="InfoLabelStyle" TargetType="Label">
+            <Setter Property="Margin" Value="20,6" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="IconSpanStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextColor" Value="{StaticResource IconColor}" />
+            <Setter Property="FontFamily" Value="{StaticResource MaterialFontFamily}" />
+        </Style>
+
+        <Style x:Key="TextSpanStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        </Style>
 
 
+
+    </views:MvxContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="JobsViewModel"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+
+            <ListView ItemsSource="{Binding OfferDetails}"
+                      ItemSelected="ListView_ItemSelected"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      CachingStrategy="RecycleElement">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Frame HasShadow="True"
+                                       Margin="20,2"
+                                       BackgroundColor="White"
+                                       Padding="0"
+                                       IsClippedToBounds="True"
+                                       CornerRadius="7">
+                                    <Grid RowSpacing="0">
+                                        <!--#region RowDefinitions (5)-->
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="30" />
+                                        </Grid.RowDefinitions>
+                                        <!--#endregion-->
+
+                                        <!--#region Truck-->
+                                        <Label Grid.Row="0"
+                                               BindingContext="{Binding vehicle}"
+                                               Style="{StaticResource InfoLabelStyle}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{StaticResource TruckIcon}" Style="{StaticResource IconSpanStyle}" />
+                                                    <Span Text="  " FontSize="14" />
+                                                    <Span Text="{Binding size}" Style="{StaticResource TextSpanStyle}" />
+                                                    <Span Text=" " FontSize="14" />
+                                                    <Span Text="{Binding buildUp}" Style="{StaticResource TextSpanStyle}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <!--#endregion-->
 
 
-            <Button Text="analytics" />
+                                        <!--#region Date-->
+                                        <Label Grid.Row="1" Style="{StaticResource InfoLabelStyle}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{StaticResource CalendarClockIcon}" Style="{StaticResource IconSpanStyle}" />
+                                                    <Span Text="  " FontSize="14" />
+                                                    <Span Text="{Binding schedule}" Style="{StaticResource TextSpanStyle}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <!--#endregion-->
+
+
+                                        <!--#region Box-->
+                                        <Label Grid.Row="2"
+                                               BindingContext="{Binding loadSummary}"
+                                               Style="{StaticResource InfoLabelStyle}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{StaticResource BoxIcon}" Style="{StaticResource IconSpanStyle}" />
+                                                    <Span Text="  " FontSize="14" />
+                                                    <Span Text="{Binding quantity}" Style="{StaticResource TextSpanStyle}" />
+                                                    <Span Text=" " FontSize="14" />
+                                                    <Span Text="{Binding handlingType}" Style="{StaticResource TextSpanStyle}" />
+                                                    <Span Text=" " FontSize="14" />
+                                                    <Span Text="{Binding weight, StringFormat='{0}kg,'}" Style="{StaticResource TextSpanStyle}" />
+                                                    <Span Text=" " FontSize="14" />
+                                                    <Span Text="{Binding m3, StringFormat='{0}m3'}" Style="{StaticResource TextSpanStyle}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <!--#endregion-->
+
+
+                                        <!--#region LocationSummary-->
+                                        <Label Grid.Row="3" Style="{StaticResource InfoLabelStyle}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{StaticResource LocationIcon}" Style="{StaticResource IconSpanStyle}" />
+                                                    <Span Text="  " FontSize="14" />
+                                                    <Span Text="{Binding totalPickup, StringFormat='Pickup {0}'}" Style="{StaticResource TextSpanStyle}" />
+                                                    <Span Text="  " FontSize="14" />
+                                                    <Span Text="{Binding totalDelivery, StringFormat='Delivery {0}'}" Style="{StaticResource TextSpanStyle}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <!--#endregion-->
+
+
+                                        <!--#region OrderId-->
+                                        <Label Grid.Row="3"
+                                               Text="# S180921-0128"
+                                               HorizontalOptions="End"
+                                               VerticalOptions="Center"
+                                               Margin="10,0"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource PrimaryColor}" />
+                                        <!--#endregion-->
+
+
+                                        <BoxView Grid.Row="4"
+                                                 BackgroundColor="{StaticResource SecondaryTextColor}"
+                                                 VerticalOptions="Start"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 HeightRequest="1" />
+
+                                        <!--<CollectionView Grid.Row="4"
+                                                        HorizontalOptions="Center"
+                                                        ItemsSource="{StaticResource array}">
+                                            <CollectionView.ItemsLayout>
+                                                <ListItemsLayout Orientation="Vertical" />
+                                            </CollectionView.ItemsLayout>
+
+                                        </CollectionView>-->
+
+
+                                        <!--#region LeftOrangeBar-->
+                                        <BoxView BackgroundColor="{StaticResource SecondaryColor}"
+                                                 HorizontalOptions="Start"
+                                                 Grid.RowSpan="5"
+                                                 VerticalOptions="FillAndExpand"
+                                                 WidthRequest="10" />
+                                        <!--#endregion-->
+
+                                        <!--#region NotificationCircle-->
+                                        <Label Text="{StaticResource CircleIcon}"
+                                               HorizontalOptions="End"
+                                               VerticalOptions="Start"
+                                               Margin="5"
+                                               FontSize="15"
+                                               TextColor="{StaticResource SecondaryColor}"
+                                               Style="{StaticResource IconLabelStyle}" />
+                                        <!--#endregion-->
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
         </StackLayout>
     </ContentPage.Content>
 
