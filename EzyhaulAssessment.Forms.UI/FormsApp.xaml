@@ -17,6 +17,7 @@
         <x:String x:Key="TruckIcon">&#xf53d;</x:String>
         <x:String x:Key="CalendarClockIcon">&#xf0f0;</x:String>
         <x:String x:Key="BoxIcon">&#xf3d7;</x:String>
+        <x:String x:Key="BoxOpenIcon">&#xf3d6;</x:String>
         <x:String x:Key="LocationIcon">&#xf7d8;</x:String>
         <x:String x:Key="LocationFillIcon">&#xf34e;</x:String>
         <x:String x:Key="ThreeDotsIcon">&#xf1d8;</x:String>
@@ -26,8 +27,7 @@
         <x:String x:Key="MessageIcon">&#xf36a;</x:String>
         <x:String x:Key="SettingsIcon">&#xf8ba;</x:String>
         <x:String x:Key="FilterIcon">&#xf233;</x:String>
-
-
+        <x:String x:Key="ErrorIcon">&#xfc21;</x:String>
         <!--#endregion-->
 
 

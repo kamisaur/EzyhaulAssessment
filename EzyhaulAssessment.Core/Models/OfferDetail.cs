@@ -28,5 +28,14 @@ namespace EzyhaulAssessment.Core.Models
 		public string timeFormat { get; set; }
 		public string dateTimeLocale { get; set; }
 		public string timeZone { get; set; }
-	}
+
+
+        /// <summary>
+        /// Properties to ease out UI bindings. 
+        /// </summary>
+        public string TruckRow => $"{vehicle.size} {vehicle.buildUp}";
+        public string BoxRow => $"{loadSummary.quantity} {loadSummary.handlingType} {loadSummary.weight}kg {loadSummary.weight}m3";
+        public string LocationRow => $"Pickup {totalPickup} Delivery {totalDelivery}";
+
+    }
 }
