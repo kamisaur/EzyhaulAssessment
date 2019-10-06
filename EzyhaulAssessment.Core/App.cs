@@ -12,9 +12,10 @@ namespace EzyhaulAssessment.Core
 	{
 		public override void Initialize()
 		{
-			Mvx.IoCProvider.RegisterType<IServerApiService, ServerApiService>();
+			//Mvx.IoCProvider.RegisterType<IServerApiService, ServerApiService>();
+            Mvx.IoCProvider.RegisterType<INetworkService, NetworkService>();
 
-			RegisterAppStart<TabsRootViewModel>();
+            RegisterAppStart<TabsRootViewModel>();
 		}
 	}
 }

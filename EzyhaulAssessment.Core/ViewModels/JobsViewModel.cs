@@ -53,13 +53,13 @@ namespace EzyhaulAssessment.Core.ViewModels
                 RaisePropertyChanged(() => OfferDetails);
             }
         }
-        //INetworkService _networkService;
-        //    , INetworkService networkService
+        INetworkService _networkService;
         public JobsViewModel(
             IMvxLogProvider logProvider
-            , IMvxNavigationService navigationService) : base(logProvider, navigationService)
+            , IMvxNavigationService navigationService
+            , INetworkService networkService) : base(logProvider, navigationService)
         {
-            //_networkService = networkService;
+            _networkService = networkService;
             CurrentState = State.Loading;
 
             OfferDetails = new List<OfferDetail>();
@@ -75,9 +75,27 @@ namespace EzyhaulAssessment.Core.ViewModels
         {
             base.ViewAppeared();
             CurrentState = State.Loading;
+
+
             try
             {
+                CurrentState = State.Loading;
+                var service = _networkService.GetApiService();
+                OfferDetails = await service.GetJobInfo();
 
+                await Items.LoadMoreAsync();
+                if (Items.Count > 0)
+                    CurrentState = State.None;
+                else
+                    CurrentState = State.Empty;
+            }
+            catch (Exception ex)
+            {
+                CurrentState = State.Error;
+            }
+
+            //try
+            //{
                 //OfferDetails = await _networkService.GetOfferDetails();
                 //await Items.LoadMoreAsync();
 
@@ -85,14 +103,11 @@ namespace EzyhaulAssessment.Core.ViewModels
                 //    CurrentState = State.None;
                 //else
                 //    CurrentState = State.Empty;
-
-
-
-            }
-            catch (Exception)
-            {
-                CurrentState = State.Error;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    CurrentState = State.Error;
+            //}
         }
 
 
