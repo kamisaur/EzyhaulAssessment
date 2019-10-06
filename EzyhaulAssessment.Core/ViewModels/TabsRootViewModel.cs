@@ -23,10 +23,12 @@ namespace EzyhaulAssessment.Core.ViewModels
 		{
 			var tasks = new List<Task>();
 			tasks.Add(NavigationService.Navigate<JobsViewModel>());
-			tasks.Add(NavigationService.Navigate<ContactDispatchViewModel>());
+            tasks.Add(NavigationService.Navigate<ContactDispatchViewModel>());
 			tasks.Add(NavigationService.Navigate<SettingsViewModel>());
 			await Task.WhenAll(tasks);
-		}
+
+
+        }
 
 
 

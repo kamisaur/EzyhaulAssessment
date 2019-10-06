@@ -15,7 +15,7 @@ namespace EzyhaulAssessment.Core
 		{
             Barrel.ApplicationId = "Ezyhaul_kk";
             Mvx.IoCProvider.RegisterType<INetworkService, NetworkService>();
-
+            Mvx.IoCProvider.RegisterSingleton<IGlobalSettingsService>(new GlobalSettingsService());
             RegisterAppStart<TabsRootViewModel>();
 		}
 	}

@@ -13,6 +13,13 @@ namespace EzyhaulAssessment.Core.Services
     {
         string _baseUrl = "https://carrier-app-api.azurewebsites.net";
         IServerApiService serverApiService;
+        IGlobalSettingsService _globalSettingsService;
+
+
+        public NetworkService(IGlobalSettingsService globalSettingsService)
+        {
+            _globalSettingsService = globalSettingsService;
+        }
 
         public IServerApiService GetApiService()
         {
@@ -25,21 +32,23 @@ namespace EzyhaulAssessment.Core.Services
             serverApiService = RestService.For<IServerApiService>(_baseUrl);
 
 
-            // get OfferDetails from cache if no internet
-            if (Connectivity.NetworkAccess == NetworkAccess.None)
-                return Barrel.Current.Get<List<OfferDetail>>(key: _baseUrl);
+            if (_globalSettingsService.UseCache)
+            {
+                // get OfferDetails from cache if no internet
+                if (Connectivity.NetworkAccess == NetworkAccess.None)
+                    return Barrel.Current.Get<List<OfferDetail>>(key: _baseUrl);
 
 
-            // get OfferDetails from cache if cache is not expire
-            if (!Barrel.Current.IsExpired(key: _baseUrl))
-                return Barrel.Current.Get<List<OfferDetail>>(key: _baseUrl);
-
+                // get OfferDetails from cache if cache is not expire
+                if (!Barrel.Current.IsExpired(key: _baseUrl))
+                    return Barrel.Current.Get<List<OfferDetail>>(key: _baseUrl);
+            }
 
             // get OfferDetails form api 
             try
             {
                 var response = await serverApiService.GetJobInfo();
-                Barrel.Current.Add(key: _baseUrl, data: response, expireIn: TimeSpan.FromMinutes(5));
+                Barrel.Current.Add(key: _baseUrl, data: response, expireIn: TimeSpan.FromMinutes(_globalSettingsService.CacheExpiry));
                 return response;
             }
             catch (Exception)

@@ -15,12 +15,97 @@
         <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="{StaticResource SettingsIcon}" />
     </views:MvxContentPage.IconImageSource>
 
+
+    <views:MvxContentPage.Resources>
+
+        <Style x:Key="TitleLabelStyle" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+
+        <Style x:Key="EntryStyle" TargetType="Entry">
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="End" />
+            <Setter Property="Keyboard" Value="Numeric" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+
+
+        <Style x:Key="StateSwitchStyle" TargetType="Switch">
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+
+    </views:MvxContentPage.Resources>
+
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Spacing="10" Padding="15,10">
+
+                <Frame CornerRadius="10">
+                    <StackLayout Spacing="10">
+                        <Label Text="Easy Scroll" Style="{StaticResource TitleLabelStyle}" />
+
+                        <StackLayout Orientation="Horizontal" Margin="10,0,0,0">
+                            <Label Text="Item Amount" Style="{StaticResource LabelStyle}" />
+                            <Entry Placeholder="amount"
+                                   Text="{Binding ItemAmount}"
+                                   Style="{StaticResource EntryStyle}" />
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+
+
+                <Frame CornerRadius="10">
+                    <StackLayout Spacing="10">
+                        <Label Text="Cache" Style="{StaticResource TitleLabelStyle}" />
+
+                        <StackLayout Orientation="Horizontal" Margin="10,0,0,0">
+                            <Label Text="Use Cache" Style="{StaticResource LabelStyle}" />
+                            <Switch IsToggled="{Binding UseCache}"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="Center" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Margin="10,0,0,0">
+                            <Label Text="Cache Expiry (min)" Style="{StaticResource LabelStyle}" />
+                            <Entry Placeholder="min"
+                                   Text="{Binding CacheExpiry}"
+                                   Style="{StaticResource EntryStyle}" />
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+
+
+
+                <Frame CornerRadius="10">
+                    <StackLayout Spacing="10">
+                        <Label Text="States Test" Style="{StaticResource TitleLabelStyle}" />
+
+                        <Picker FontSize="14"
+                                ItemsSource="{Binding States}"
+                                SelectedItem="{Binding SelectedState}" />
+
+                    </StackLayout>
+                </Frame>
+
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 
 

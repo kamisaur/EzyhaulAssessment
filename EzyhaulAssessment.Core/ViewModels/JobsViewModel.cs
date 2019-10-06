@@ -16,8 +16,10 @@ namespace EzyhaulAssessment.Core.ViewModels
 
     public class JobsViewModel : MvxNavigationViewModel
     {
+        INetworkService _networkService;
+        IGlobalSettingsService _globalSettingsService;
 
-        private const int PageSize = 6;
+        private int ItemAmount = 6;
 
         private State _currentState;
         public State CurrentState
@@ -53,13 +55,18 @@ namespace EzyhaulAssessment.Core.ViewModels
                 RaisePropertyChanged(() => OfferDetails);
             }
         }
-        INetworkService _networkService;
+      
+        
         public JobsViewModel(
             IMvxLogProvider logProvider
+            , IGlobalSettingsService globalSettingsService
             , IMvxNavigationService navigationService
             , INetworkService networkService) : base(logProvider, navigationService)
         {
             _networkService = networkService;
+            _globalSettingsService = globalSettingsService;
+
+
             CurrentState = State.Loading;
 
             OfferDetails = new List<OfferDetail>();
@@ -76,15 +83,24 @@ namespace EzyhaulAssessment.Core.ViewModels
             base.ViewAppeared();
             try
             {
-                CurrentState = State.Loading;
+                ItemAmount = _globalSettingsService.ItemAmount;
 
-                OfferDetails = await _networkService.GetOfferDetails();
-                await Items.LoadMoreAsync();
+                if (_globalSettingsService.TestingState == State.None)
+                {
+                    CurrentState = State.Loading;
 
-                if (Items.Count > 0)
-                    CurrentState = State.None;
+                    OfferDetails = await _networkService.GetOfferDetails();
+                    await Items.LoadMoreAsync();
+
+                    if (Items.Count > 0)
+                        CurrentState = State.None;
+                    else
+                        CurrentState = State.Empty;
+                }
                 else
-                    CurrentState = State.Empty;
+                {
+                    CurrentState = _globalSettingsService.TestingState;
+                }
             }
             catch (Exception ex)
             {
@@ -100,10 +116,10 @@ namespace EzyhaulAssessment.Core.ViewModels
             await Task.Delay(2000);
 
             InfiniteScrollCollection<OfferDetail> tempList = new InfiniteScrollCollection<OfferDetail>();
-            var page = (Items.Count / PageSize);
-            var startIndex = page * PageSize;
+            var page = (Items.Count / ItemAmount);
+            var startIndex = page * ItemAmount;
 
-            var rangeList = OfferDetails.GetRange(startIndex, PageSize);
+            var rangeList = OfferDetails.GetRange(startIndex, ItemAmount);
             tempList.AddRange(rangeList);
             return tempList;
         }
