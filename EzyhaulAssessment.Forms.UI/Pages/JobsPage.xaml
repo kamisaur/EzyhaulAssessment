@@ -9,6 +9,7 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:scroll="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
                       xmlns:state="clr-namespace:Xamarin.Forms.StateSquid;assembly=Xamarin.Forms.StateSquid"
+                      xmlns:templates="clr-namespace:EzyhaulAssessment.Forms.UI.Templates"
                       mc:Ignorable="d"
                       x:Class="EzyhaulAssessment.Forms.UI.Pages.JobsPage"
                       Title="Jobs">
@@ -27,6 +28,8 @@
             <x:String>Item</x:String>
             <x:String>Item</x:String>
         </x:Array>
+
+        <templates:LocationTemplateSelector x:Key="locationTemSelector" />
 
         <Style x:Key="InfoLabelStyle" TargetType="Label">
             <Setter Property="Margin" Value="20,6" />
@@ -497,13 +500,15 @@
                                         <CollectionView Grid.Row="4"
                                                         Margin="10,0,0,0"
                                                         HorizontalOptions="FillAndExpand"
+                                                        ItemTemplate="{StaticResource locationTemSelector}"
                                                         ItemsSource="{Binding locations}">
                                             <CollectionView.ItemsLayout>
                                                 <ListItemsLayout Orientation="Horizontal" />
                                             </CollectionView.ItemsLayout>
 
 
-                                            <CollectionView.ItemTemplate>
+                                            <!--  DataTemplateSelector was added to ease out bindings for UI  -->
+                                            <!--<CollectionView.ItemTemplate>
                                                 <DataTemplate>
                                                     <Grid>
                                                         <Frame Style="{StaticResource ChipFrameStyle}">
@@ -517,7 +522,7 @@
                                                         </Frame>
                                                     </Grid>
                                                 </DataTemplate>
-                                            </CollectionView.ItemTemplate>
+                                            </CollectionView.ItemTemplate>-->
 
                                         </CollectionView>
                                         <!--#endregion-->
