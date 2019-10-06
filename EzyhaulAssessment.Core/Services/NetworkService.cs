@@ -1,4 +1,5 @@
 ﻿using EzyhaulAssessment.Core.Models;
+using MonkeyCache.SQLite;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -26,17 +27,13 @@ namespace EzyhaulAssessment.Core.Services
 
             // get OfferDetails from cache if no internet
             if (Connectivity.NetworkAccess == NetworkAccess.None)
-            {
+                return Barrel.Current.Get<List<OfferDetail>>(key: _baseUrl);
 
-            }
 
-            //// get OfferDetails from cache if no internet
-            //if (Connectivity.NetworkAccess == NetworkAccess.None)
-            //        return Barrel.Current.Get<List<OfferDetail>>(key: _baseUrl);
+            // get OfferDetails from cache if cache is not expire
+            if (!Barrel.Current.IsExpired(key: _baseUrl))
+                return Barrel.Current.Get<List<OfferDetail>>(key: _baseUrl);
 
-            //// get OfferDetails from cache if cache is not expire
-            //if (!Barrel.Current.IsExpired(key: _baseUrl))
-            //    return Barrel.Current.Get<List<OfferDetail>>(key: _baseUrl);
 
             // get OfferDetails form api 
             try

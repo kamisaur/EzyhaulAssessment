@@ -1,5 +1,6 @@
 ﻿using EzyhaulAssessment.Core.Services;
 using EzyhaulAssessment.Core.ViewModels;
+using MonkeyCache.SQLite;
 using MvvmCross;
 using MvvmCross.ViewModels;
 using System;
@@ -12,7 +13,7 @@ namespace EzyhaulAssessment.Core
 	{
 		public override void Initialize()
 		{
-			//Mvx.IoCProvider.RegisterType<IServerApiService, ServerApiService>();
+            Barrel.ApplicationId = "Ezyhaul_kk";
             Mvx.IoCProvider.RegisterType<INetworkService, NetworkService>();
 
             RegisterAppStart<TabsRootViewModel>();

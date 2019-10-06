@@ -104,7 +104,7 @@ namespace EzyhaulAssessment.Core.ViewModels
                 else
                     CurrentState = State.Empty;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 CurrentState = State.Error;
             }
