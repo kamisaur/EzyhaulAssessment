@@ -77,37 +77,37 @@ namespace EzyhaulAssessment.Core.ViewModels
             CurrentState = State.Loading;
 
 
+            //try
+            //{
+            //    CurrentState = State.Loading;
+            //    var service = _networkService.GetApiService();
+            //    OfferDetails = await service.GetJobInfo();
+
+            //    await Items.LoadMoreAsync();
+            //    if (Items.Count > 0)
+            //        CurrentState = State.None;
+            //    else
+            //        CurrentState = State.Empty;
+            //}
+            //catch (Exception ex)
+            //{
+            //    CurrentState = State.Error;
+            //}
+
             try
             {
-                CurrentState = State.Loading;
-                var service = _networkService.GetApiService();
-                OfferDetails = await service.GetJobInfo();
-
+                OfferDetails = await _networkService.GetOfferDetails();
                 await Items.LoadMoreAsync();
+
                 if (Items.Count > 0)
                     CurrentState = State.None;
                 else
                     CurrentState = State.Empty;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 CurrentState = State.Error;
             }
-
-            //try
-            //{
-                //OfferDetails = await _networkService.GetOfferDetails();
-                //await Items.LoadMoreAsync();
-
-                //if (Items.Count > 0)
-                //    CurrentState = State.None;
-                //else
-                //    CurrentState = State.Empty;
-            //}
-            //catch (Exception)
-            //{
-            //    CurrentState = State.Error;
-            //}
         }
 
 
