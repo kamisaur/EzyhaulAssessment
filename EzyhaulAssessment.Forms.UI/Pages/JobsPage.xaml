@@ -8,6 +8,7 @@
                       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:scroll="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+                      xmlns:state="clr-namespace:Xamarin.Forms.StateSquid;assembly=Xamarin.Forms.StateSquid"
                       mc:Ignorable="d"
                       x:Class="EzyhaulAssessment.Forms.UI.Pages.JobsPage"
                       Title="Jobs">
@@ -17,16 +18,14 @@
     </views:MvxContentPage.IconImageSource>
 
     <views:MvxContentPage.Resources>
+
         <x:Array x:Key="array" Type="{x:Type x:String}">
-            <x:String>mono</x:String>
-            <x:String>monodroid</x:String>
-            <x:String>monotouch</x:String>
-            <x:String>monorail</x:String>
-            <x:String>monodevelop</x:String>
-            <x:String>monotone</x:String>
-            <x:String>monopoly</x:String>
-            <x:String>monomodal</x:String>
-            <x:String>mononucleosis</x:String>
+            <x:String>Item</x:String>
+            <x:String>Item</x:String>
+            <x:String>Item</x:String>
+            <x:String>Item</x:String>
+            <x:String>Item</x:String>
+            <x:String>Item</x:String>
         </x:Array>
 
         <Style x:Key="InfoLabelStyle" TargetType="Label">
@@ -45,6 +44,28 @@
         <Style x:Key="TextSpanStyle" TargetType="Label">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        </Style>
+
+
+        <Style x:Key="LoadingIconStyle"
+               TargetType="Label"
+               BasedOn="{StaticResource IconSpanStyle}">
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="HorizontalTextAlignment" Value="End" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+
+        <Style x:Key="SkeletonTextStyle" TargetType="state:SkeletonView">
+            <Setter Property="Margin" Value="10,6" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="HeightRequest" Value="12" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="BackgroundColor" Value="#cccccc" />
         </Style>
 
 
@@ -78,10 +99,225 @@
             <Setter Property="BackgroundColor" Value="{StaticResource LocationChipColor}" />
         </Style>
 
+
+
+        <Style x:Key="SkeletonChipFrameStyle" TargetType="state:SkeletonView">
+            <Setter Property="Margin" Value="3,0" />
+            <Setter Property="HeightRequest" Value="20" />
+            <Setter Property="WidthRequest" Value="60" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="BackgroundColor" Value="#cccccc" />
+        </Style>
+
     </views:MvxContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Margin="0">
+        <Grid Margin="0" state:StateLayout.CurrentState="{Binding CurrentState}">
+            <state:StateLayout.StateViews>
+
+                <state:StateView StateKey="Loading" VerticalOptions="FillAndExpand">
+                    <ListView ItemsSource="{StaticResource array}"
+                              ItemSelected="ListView_ItemSelected"
+                              HasUnevenRows="True"
+                              SeparatorVisibility="None"
+                              VerticalOptions="FillAndExpand"
+                              HorizontalOptions="FillAndExpand">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Frame HasShadow="True"
+                                               Margin="15,4"
+                                               BackgroundColor="White"
+                                               Padding="0"
+                                               IsClippedToBounds="True"
+                                               CornerRadius="7">
+                                            <Grid RowSpacing="0" ColumnSpacing="0">
+                                                <!--#region RowDefinitions (5)-->
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="32" />
+                                                    <RowDefinition Height="32" />
+                                                    <RowDefinition Height="32" />
+                                                    <RowDefinition Height="32" />
+                                                    <RowDefinition Height="38" />
+                                                </Grid.RowDefinitions>
+                                                <!--#endregion-->
+                                                <!--#region ColumnDefinitions (2)-->
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="40" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="40" />
+                                                </Grid.ColumnDefinitions>
+                                                <!--#endregion-->
+
+                                                <!--#region Truck-->
+                                                <Label Grid.Row="0"
+                                                       Text="{StaticResource TruckIcon}"
+                                                       Style="{StaticResource LoadingIconStyle}" />
+                                                <state:SkeletonView Grid.Row="0"
+                                                                    WidthRequest="150"
+                                                                    Style="{StaticResource SkeletonTextStyle}" />
+                                                <!--#endregion-->
+
+
+                                                <!--#region Date-->
+                                                <Label Grid.Row="1"
+                                                       Text="{StaticResource CalendarClockIcon}"
+                                                       Style="{StaticResource LoadingIconStyle}" />
+                                                <state:SkeletonView Grid.Row="1"
+                                                                    WidthRequest="130"
+                                                                    Style="{StaticResource SkeletonTextStyle}" />
+                                                <!--#endregion-->
+
+
+                                                <!--#region Box-->
+                                                <Label Grid.Row="2"
+                                                       Text="{StaticResource BoxIcon}"
+                                                       Style="{StaticResource LoadingIconStyle}" />
+                                                <state:SkeletonView Grid.Row="2"
+                                                                    WidthRequest="160"
+                                                                    Style="{StaticResource SkeletonTextStyle}" />
+                                                <!--#endregion-->
+
+
+                                                <!--#region LocationSummary-->
+                                                <Label Grid.Row="3"
+                                                       Text="{StaticResource LocationIcon}"
+                                                       Style="{StaticResource LoadingIconStyle}" />
+                                                <state:SkeletonView Grid.Row="3"
+                                                                    WidthRequest="140"
+                                                                    Style="{StaticResource SkeletonTextStyle}" />
+                                                <!--#endregion-->
+
+
+                                                <!--#region OrderId-->
+                                                <state:SkeletonView Grid.Row="3"
+                                                                    Grid.ColumnSpan="2"
+                                                                    HorizontalOptions="End"
+                                                                    VerticalOptions="Center"
+                                                                    WidthRequest="80"
+                                                                    Margin="10,0"
+                                                                    Style="{StaticResource SkeletonTextStyle}" />
+                                                <!--#endregion-->
+
+
+                                                <!--#region HorizontalSeparator-->
+                                                <BoxView Grid.Row="4"
+                                                         BackgroundColor="{StaticResource SecondaryTextColor}"
+                                                         VerticalOptions="Start"
+                                                         Grid.ColumnSpan="3"
+                                                         HorizontalOptions="FillAndExpand"
+                                                         HeightRequest="1" />
+                                                <!--#endregion-->
+
+
+                                                <!--#region ChipLocation-->
+
+                                                <StackLayout Grid.Row="4"
+                                                             Grid.ColumnSpan="2"
+                                                             Orientation="Horizontal"
+                                                             Margin="20,3"
+                                                             HorizontalOptions="FillAndExpand">
+                                                    <state:SkeletonView Style="{StaticResource SkeletonChipFrameStyle}" />
+                                                    <state:SkeletonView Style="{StaticResource SkeletonChipFrameStyle}" />
+                                                </StackLayout>
+                                                <!--#endregion-->
+
+
+                                                <!--#region VerticalSeparator-->
+                                                <BoxView Grid.Row="4"
+                                                         Grid.Column="1"
+                                                         WidthRequest="1"
+                                                         HorizontalOptions="End"
+                                                         BackgroundColor="{StaticResource SecondaryTextColor}" />
+                                                <!--#endregion-->
+
+
+                                                <!--#region ThreeDots-->
+                                                <Label Grid.Row="4"
+                                                       Grid.Column="2"
+                                                       Text="{StaticResource ThreeDotsIcon}"
+                                                       TextColor="{StaticResource PrimaryColor}"
+                                                       FontSize="20"
+                                                       VerticalTextAlignment="Center"
+                                                       HorizontalOptions="Center"
+                                                       HorizontalTextAlignment="Center"
+                                                       VerticalOptions="Center"
+                                                       Margin="8,5"
+                                                       Style="{StaticResource IconLabelStyle}" />
+                                                <!--#endregion-->
+
+
+
+                                                <!--#region LeftOrangeBar-->
+                                                <BoxView BackgroundColor="{StaticResource SecondaryColor}"
+                                                         HorizontalOptions="Start"
+                                                         Grid.RowSpan="5"
+                                                         VerticalOptions="FillAndExpand"
+                                                         WidthRequest="10" />
+                                                <!--#endregion-->
+
+                                                <!--#region NotificationCircle-->
+                                                <Label Text="{StaticResource CircleIcon}"
+                                                       Grid.ColumnSpan="3"
+                                                       HorizontalOptions="End"
+                                                       VerticalOptions="Start"
+                                                       Margin="5"
+                                                       FontSize="15"
+                                                       TextColor="{StaticResource SecondaryColor}"
+                                                       Style="{StaticResource IconLabelStyle}" />
+                                                <!--#endregion-->
+                                            </Grid>
+                                        </Frame>
+                                    </Grid>
+
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </state:StateView>
+
+
+                <state:StateView StateKey="Empty" VerticalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="Center"
+                                 VerticalOptions="Center"
+                                 Spacing="15"
+                                 Margin="20">
+                        <Label Text="{StaticResource BoxOpenIcon}"
+                               FontSize="80"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               TextColor="{StaticResource PrimaryColor}"
+                               Style="{StaticResource IconLabelStyle}" />
+                        <Label Text="No Jobs available yet."
+                               FontSize="20"
+                               TextColor="{StaticResource SecondaryTextColor}"
+                               HorizontalTextAlignment="Center" />
+                    </StackLayout>
+                </state:StateView>
+
+
+                <state:StateView StateKey="Error" VerticalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="Center"
+                                 VerticalOptions="Center"
+                                 Spacing="15"
+                                 Margin="20">
+                        <Label Text="{StaticResource ErrorIcon}"
+                               FontSize="80"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               TextColor="{StaticResource PrimaryColor}"
+                               Style="{StaticResource IconLabelStyle}" />
+                        <Label Text="Ooops... Something went wrong. Please check your internet connection"
+                               FontSize="20"
+                               TextColor="{StaticResource SecondaryTextColor}"
+                               HorizontalTextAlignment="Center" />
+                    </StackLayout>
+                </state:StateView>
+
+            </state:StateLayout.StateViews>
 
             <ListView ItemsSource="{Binding Items}"
                       ItemSelected="ListView_ItemSelected"
@@ -89,8 +325,30 @@
                       SeparatorVisibility="None"
                       CachingStrategy="RecycleElement">
                 <ListView.Behaviors>
-                    <scroll:InfiniteScrollBehavior />
+                    <scroll:InfiniteScrollBehavior IsLoadingMore="{Binding IsWorking}" />
                 </ListView.Behaviors>
+
+
+                <ListView.Footer>
+                    <StackLayout Padding="10" IsVisible="{Binding IsWorking}">
+                        <StackLayout.Triggers>
+                            <Trigger TargetType="StackLayout" Property="IsVisible" Value="False">
+                                <Setter Property="HeightRequest" Value="0" />
+                            </Trigger>
+                        </StackLayout.Triggers>
+
+                        <ActivityIndicator IsRunning="True"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           Color="{StaticResource SecondaryColor}" />
+
+                        <Label Text="Loading..."
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+
+                    </StackLayout>
+                </ListView.Footer>
+
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -120,7 +378,16 @@
                                         <!--#endregion-->
 
                                         <!--#region Truck-->
-                                        <Label Grid.Row="0"
+                                        <Label Grid.Row="0" Style="{StaticResource InfoLabelStyle}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{StaticResource TruckIcon}" Style="{StaticResource IconSpanStyle}" />
+                                                    <Span Text="  " FontSize="14" />
+                                                    <Span Text="{Binding TruckRow}" Style="{StaticResource TextSpanStyle}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <!--<Label Grid.Row="0"
                                                BindingContext="{Binding vehicle}"
                                                Style="{StaticResource InfoLabelStyle}">
                                             <Label.FormattedText>
@@ -128,11 +395,12 @@
                                                     <Span Text="{StaticResource TruckIcon}" Style="{StaticResource IconSpanStyle}" />
                                                     <Span Text="  " FontSize="14" />
                                                     <Span Text="{Binding size}" Style="{StaticResource TextSpanStyle}" />
+                                                    <Span Text="{Binding size}" Style="{StaticResource TextSpanStyle}" />
                                                     <Span Text=" " FontSize="14" />
                                                     <Span Text="{Binding buildUp}" Style="{StaticResource TextSpanStyle}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
-                                        </Label>
+                                        </Label>-->
                                         <!--#endregion-->
 
 
@@ -150,7 +418,16 @@
 
 
                                         <!--#region Box-->
-                                        <Label Grid.Row="2"
+                                        <Label Grid.Row="2" Style="{StaticResource InfoLabelStyle}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{StaticResource BoxIcon}" Style="{StaticResource IconSpanStyle}" />
+                                                    <Span Text="  " FontSize="14" />
+                                                    <Span Text="{Binding BoxRow}" Style="{StaticResource TextSpanStyle}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <!--<Label Grid.Row="2"
                                                BindingContext="{Binding loadSummary}"
                                                Style="{StaticResource InfoLabelStyle}">
                                             <Label.FormattedText>
@@ -166,7 +443,7 @@
                                                     <Span Text="{Binding m3, StringFormat='{0}m3'}" Style="{StaticResource TextSpanStyle}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
-                                        </Label>
+                                        </Label>-->
                                         <!--#endregion-->
 
 
@@ -176,12 +453,21 @@
                                                 <FormattedString>
                                                     <Span Text="{StaticResource LocationIcon}" Style="{StaticResource IconSpanStyle}" />
                                                     <Span Text="  " FontSize="14" />
+                                                    <Span Text="{Binding LocationRow}" Style="{StaticResource TextSpanStyle}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <!--<Label Grid.Row="3" Style="{StaticResource InfoLabelStyle}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{StaticResource LocationIcon}" Style="{StaticResource IconSpanStyle}" />
+                                                    <Span Text="  " FontSize="14" />
                                                     <Span Text="{Binding totalPickup, StringFormat='Pickup {0}'}" Style="{StaticResource TextSpanStyle}" />
                                                     <Span Text="  " FontSize="14" />
                                                     <Span Text="{Binding totalDelivery, StringFormat='Delivery {0}'}" Style="{StaticResource TextSpanStyle}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
-                                        </Label>
+                                        </Label>-->
                                         <!--#endregion-->
 
 
@@ -209,7 +495,7 @@
 
                                         <!--#region ChipLocation-->
                                         <CollectionView Grid.Row="4"
-                                                        Margin="20,0,0,0"
+                                                        Margin="10,0,0,0"
                                                         HorizontalOptions="FillAndExpand"
                                                         ItemsSource="{Binding locations}">
                                             <CollectionView.ItemsLayout>
@@ -288,7 +574,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 
 

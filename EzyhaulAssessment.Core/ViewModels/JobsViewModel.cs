@@ -8,15 +8,28 @@ using System.Text;
 using EzyhaulAssessment.Core.Services;
 using EzyhaulAssessment.Core.Models;
 using Xamarin.Forms.Extended;
+using System.Threading.Tasks;
+using Xamarin.Forms.StateSquid;
 
 namespace EzyhaulAssessment.Core.ViewModels
 {
 
-	public class JobsViewModel : MvxNavigationViewModel
-	{
-        IServerApiService _serverApiService;
+    public class JobsViewModel : MvxNavigationViewModel
+    {
+
         private const int PageSize = 6;
-        private  int currentPage = 1;
+
+        private State _currentState;
+        public State CurrentState
+        {
+            get => _currentState;
+            set
+            {
+                _currentState = value;
+                RaisePropertyChanged(() => CurrentState);
+            }
+        }
+
 
         private InfiniteScrollCollection<OfferDetail> _items;
         public InfiniteScrollCollection<OfferDetail> Items
@@ -25,7 +38,7 @@ namespace EzyhaulAssessment.Core.ViewModels
             set
             {
                 _items = value;
-				RaisePropertyChanged(() => Items);
+                RaisePropertyChanged(() => Items);
             }
         }
 
@@ -37,59 +50,82 @@ namespace EzyhaulAssessment.Core.ViewModels
             set
             {
                 _offerDetails = value;
-				RaisePropertyChanged(() => OfferDetails);
+                RaisePropertyChanged(() => OfferDetails);
             }
         }
-
+        //INetworkService _networkService;
+        //    , INetworkService networkService
         public JobsViewModel(
             IMvxLogProvider logProvider
-            , IMvxNavigationService navigationService
-            , IServerApiService serverApiService) : base(logProvider, navigationService)
-		{
-            _serverApiService = serverApiService;
+            , IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        {
+            //_networkService = networkService;
+            CurrentState = State.Loading;
 
-
+            OfferDetails = new List<OfferDetail>();
+            Items = new InfiniteScrollCollection<OfferDetail>
+            {
+                OnLoadMore = async () => await PopulateList(),
+                OnCanLoadMore = () => Items.Count < OfferDetails.Count
+            };
         }
 
 
         public async override void ViewAppeared()
         {
             base.ViewAppeared();
-
+            CurrentState = State.Loading;
             try
             {
-                OfferDetails = await _serverApiService.GetJobInfo();
+
+                //OfferDetails = await _networkService.GetOfferDetails();
+                //await Items.LoadMoreAsync();
+
+                //if (Items.Count > 0)
+                //    CurrentState = State.None;
+                //else
+                //    CurrentState = State.Empty;
 
 
-               
 
-                Items = new InfiniteScrollCollection<OfferDetail>
-                {
-                    OnLoadMore = async () =>
-                    {
-                        InfiniteScrollCollection<OfferDetail> tempList = new InfiniteScrollCollection<OfferDetail>();
-                        // load the next page
-                        var page = (Items.Count / PageSize);
-
-                        for (int i = page; i < page * PageSize; i++)
-                        {
-                            tempList.Add(OfferDetails[i]);
-                        }
-                        return tempList;
-                    },
-                    OnCanLoadMore = () => Items.Count < OfferDetails.Count
-                };
-
-                for (int i = 0; i < 6; i++)
-                    Items.Add(OfferDetails[i]);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-            }      
+                CurrentState = State.Error;
+            }
         }
 
 
+        //try
+        //{
+        //    CurrentState = State.Loading;
+        //    var service = _networkService.GetApiService();
+        //    OfferDetails = await service.GetJobInfo();
+
+        //    await Items.LoadMoreAsync();
+        //    if(Items.Count > 0)
+        //        CurrentState = State.None;
+        //    else
+        //        CurrentState = State.Empty;
+        //}
+        //catch (Exception ex)
+        //{
+        //    CurrentState = State.Error;
+        //}
+
+
+        private async Task<InfiniteScrollCollection<OfferDetail>> PopulateList()
+        {
+            await Task.Delay(2000);
+
+            InfiniteScrollCollection<OfferDetail> tempList = new InfiniteScrollCollection<OfferDetail>();
+            var page = (Items.Count / PageSize);
+            var startIndex = page * PageSize;
+
+            var rangeList = OfferDetails.GetRange(startIndex, PageSize);
+            tempList.AddRange(rangeList);
+            return tempList;
+        }
 
 
     }
