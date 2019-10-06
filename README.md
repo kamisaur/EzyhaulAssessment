@@ -6,7 +6,7 @@ The app fetches data from api
 ```
 https://carrier-app-api.azurewebsites.net/api/data/offers?code=UwwoqV/ZrIXiUVZbvpRhCgxiujKqrAfSMxWkGGndjmJW8UOWD5xEvg==
 ```
-Caching is implemented to load localy saved date if there is no internet connection
+Caching is implemented to load localy saved data if there is no internet connection
 
 
 
