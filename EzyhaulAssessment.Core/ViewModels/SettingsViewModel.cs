@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EzyhaulAssessment.Core.Services;
+using EzyhaulAssessment.Core.Utilities;
 using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
+using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using Xamarin.Forms.StateSquid;
 
@@ -13,6 +15,7 @@ namespace EzyhaulAssessment.Core.ViewModels
 {
 	public class SettingsViewModel : MvxNavigationViewModel
 	{
+        IMvxMessenger _messenger;
 
         private int _itemAmount;
         public int ItemAmount
@@ -90,16 +93,22 @@ namespace EzyhaulAssessment.Core.ViewModels
         public SettingsViewModel(
             IMvxLogProvider logProvider
             , IGlobalSettingsService globalSettingsService
-            , IMvxNavigationService navigationService) 
+            , IMvxMessenger messenger
+            , IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
 		{
             _globalSettingsService = globalSettingsService;
+            _messenger = messenger;
 
         }
 
 
         public override void ViewAppeared()
         {
+
+            var message = new TitleMessage(this, "Settings");
+            _messenger.Publish(message);
+
 
             ItemAmount = _globalSettingsService.ItemAmount;
             CacheExpiry = _globalSettingsService.CacheExpiry;

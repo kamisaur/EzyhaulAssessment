@@ -2,6 +2,7 @@
 using EzyhaulAssessment.Core.ViewModels;
 using MonkeyCache.SQLite;
 using MvvmCross;
+using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace EzyhaulAssessment.Core
 		public override void Initialize()
 		{
             Barrel.ApplicationId = "Ezyhaul_kk";
+
+            Mvx.IoCProvider.RegisterSingleton<IMvxMessenger>(new MvxMessengerHub());
             Mvx.IoCProvider.RegisterType<INetworkService, NetworkService>();
             Mvx.IoCProvider.RegisterSingleton<IGlobalSettingsService>(new GlobalSettingsService());
             RegisterAppStart<TabsRootViewModel>();

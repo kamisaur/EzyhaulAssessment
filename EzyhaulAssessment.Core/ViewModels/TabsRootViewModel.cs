@@ -1,22 +1,71 @@
-﻿using MvvmCross.Commands;
+﻿using EzyhaulAssessment.Core.Utilities;
+using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
+using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace EzyhaulAssessment.Core.ViewModels
 {
 	public class TabsRootViewModel : MvxNavigationViewModel
 	{
-		public TabsRootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        IMvxMessenger _messenger;
+        private readonly MvxSubscriptionToken _token;
+
+
+        private string _titleName;
+        public string TitleName
+        {
+            get => _titleName;
+            set
+            {
+                _titleName = value;
+                RaisePropertyChanged(() => TitleName);
+            }
+        }
+
+
+        private bool _showToolbarIcons;
+        public bool ShowToolbarIcons
+        {
+            get => _showToolbarIcons;
+            set
+            {
+                _showToolbarIcons = value;
+                RaisePropertyChanged(() => ShowToolbarIcons);
+            }
+        }
+
+
+        public TabsRootViewModel(
+            IMvxLogProvider logProvider
+            , IMvxMessenger messenger
+            , IMvxNavigationService navigationService)
+            : base(logProvider, navigationService)
 		{
 			ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
-		}
+            _messenger = messenger;
+            _token = _messenger.Subscribe<TitleMessage>(OnTitleMessage);
 
-		public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
+        }
+
+        private void OnTitleMessage(TitleMessage obj)
+        {
+            TitleName = obj.Title;
+
+            if(TitleName == "Jobs")
+                ShowToolbarIcons = true;
+            else
+                ShowToolbarIcons = false;
+
+        }
+
+        public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
 
 
 		private async Task ShowInitialViewModels()

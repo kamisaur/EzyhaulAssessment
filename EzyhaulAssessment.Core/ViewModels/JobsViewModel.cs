@@ -10,6 +10,9 @@ using EzyhaulAssessment.Core.Models;
 using Xamarin.Forms.Extended;
 using System.Threading.Tasks;
 using Xamarin.Forms.StateSquid;
+using Xamarin.Essentials;
+using MvvmCross.Plugin.Messenger;
+using EzyhaulAssessment.Core.Utilities;
 
 namespace EzyhaulAssessment.Core.ViewModels
 {
@@ -18,6 +21,7 @@ namespace EzyhaulAssessment.Core.ViewModels
     {
         INetworkService _networkService;
         IGlobalSettingsService _globalSettingsService;
+        IMvxMessenger _messenger;
 
         private int ItemAmount = 6;
 
@@ -61,10 +65,13 @@ namespace EzyhaulAssessment.Core.ViewModels
             IMvxLogProvider logProvider
             , IGlobalSettingsService globalSettingsService
             , IMvxNavigationService navigationService
+            , IMvxMessenger messenger
             , INetworkService networkService) : base(logProvider, navigationService)
         {
             _networkService = networkService;
             _globalSettingsService = globalSettingsService;
+            _messenger = messenger;
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
 
 
             CurrentState = State.Loading;
@@ -78,9 +85,33 @@ namespace EzyhaulAssessment.Core.ViewModels
         }
 
 
+        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            if (e.NetworkAccess == NetworkAccess.None || e.NetworkAccess == NetworkAccess.ConstrainedInternet)
+            {
+
+            }
+            else if (e.NetworkAccess == NetworkAccess.Internet)
+            {
+                await GetOfferDetails();
+            }
+        }
+
+
         public async override void ViewAppeared()
         {
             base.ViewAppeared();
+
+            var message = new TitleMessage(this, "Jobs");
+            _messenger.Publish(message);
+
+
+            await GetOfferDetails();
+        }
+
+
+        private async Task GetOfferDetails()
+        {
             try
             {
                 ItemAmount = _globalSettingsService.ItemAmount;
@@ -107,9 +138,6 @@ namespace EzyhaulAssessment.Core.ViewModels
                 CurrentState = State.Error;
             }
         }
-
-
-
 
         private async Task<InfiniteScrollCollection<OfferDetail>> PopulateList()
         {

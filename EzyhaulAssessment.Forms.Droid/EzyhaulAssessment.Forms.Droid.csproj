@@ -108,6 +108,9 @@
     <PackageReference Include="MvvmCross.Forms">
       <Version>6.4.1</Version>
     </PackageReference>
+    <PackageReference Include="MvvmCross.Plugin.Messenger">
+      <Version>6.4.1</Version>
+    </PackageReference>
     <PackageReference Include="refit">
       <Version>4.7.51</Version>
     </PackageReference>

@@ -12,7 +12,6 @@
                      android:TabbedPage.ToolbarPlacement="Bottom"
                      mc:Ignorable="d"
                      x:Class="EzyhaulAssessment.Forms.UI.Pages.TabsRootPage"
-                     Title="Jobs"
                      android:TabbedPage.BarItemColor="Gray"
                      android:TabbedPage.BarSelectedItemColor="{StaticResource PrimaryColor}">
 
@@ -37,12 +36,14 @@
                    TextColor="{StaticResource SecondaryTextColor}"
                    HorizontalOptions="Start"
                    VerticalOptions="Center"
-                   VerticalTextAlignment="Center" />
+                   VerticalTextAlignment="Center"
+                   IsVisible="{Binding ShowToolbarIcons}" />
 
-            <Label Text="Jobs"
+            <Label Text="{Binding TitleName}"
                    FontSize="20"
                    FontAttributes="Bold"
-                   HorizontalOptions="CenterAndExpand"
+                   HorizontalOptions="FillAndExpand"
+                   HorizontalTextAlignment="Center"
                    TextColor="{StaticResource PrimaryTextColor}"
                    VerticalOptions="Center"
                    VerticalTextAlignment="Center" />
@@ -53,7 +54,8 @@
                    VerticalOptions="Center"
                    VerticalTextAlignment="Center"
                    TextColor="{StaticResource PrimaryTextColor}"
-                   Style="{StaticResource IconLabelStyle}" />
+                   Style="{StaticResource IconLabelStyle}"
+                   IsVisible="{Binding ShowToolbarIcons}" />
 
         </Grid>
     </NavigationPage.TitleView>

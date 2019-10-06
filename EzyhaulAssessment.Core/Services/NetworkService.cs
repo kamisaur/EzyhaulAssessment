@@ -35,7 +35,7 @@ namespace EzyhaulAssessment.Core.Services
             if (_globalSettingsService.UseCache)
             {
                 // get OfferDetails from cache if no internet
-                if (Connectivity.NetworkAccess == NetworkAccess.None)
+                if (Connectivity.NetworkAccess == NetworkAccess.None || Connectivity.NetworkAccess == NetworkAccess.ConstrainedInternet)
                     return Barrel.Current.Get<List<OfferDetail>>(key: _baseUrl);
 
 
