@@ -126,6 +126,8 @@ namespace EzyhaulAssessment.Core.ViewModels
                     CurrentState = State.Loading;
 
                     OfferDetails = await _networkService.GetOfferDetails();
+
+                    Items.Clear();
                     await Items.LoadMoreAsync();
 
                     if (Items.Count > 0)

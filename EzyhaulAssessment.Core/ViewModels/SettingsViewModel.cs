@@ -141,9 +141,17 @@ namespace EzyhaulAssessment.Core.ViewModels
         {
             base.ViewDisappeared();
 
+            if(ItemAmount == 0)
+                ItemAmount = 1;
+            
+            if(CacheExpiry == 0)
+                CacheExpiry = 1;
+
+
             _globalSettingsService.ItemAmount = ItemAmount;
             _globalSettingsService.CacheExpiry = CacheExpiry;
             _globalSettingsService.UseCache = UseCache;
+
 
             switch (SelectedState)
             {
