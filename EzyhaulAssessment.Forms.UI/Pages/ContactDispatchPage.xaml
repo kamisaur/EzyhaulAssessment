@@ -17,10 +17,20 @@
 
 
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Contact Dispatch Coming Soon!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+        <StackLayout HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Spacing="15"
+                     Margin="20">
+            <Label Text="{StaticResource MessageIcon}"
+                   FontSize="80"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   TextColor="{StaticResource PrimaryColor}"
+                   Style="{StaticResource IconLabelStyle}" />
+            <Label Text="No contacts available yet."
+                   FontSize="20"
+                   TextColor="{StaticResource SecondaryTextColor}"
+                   HorizontalTextAlignment="Center" />
         </StackLayout>
     </ContentPage.Content>
 
