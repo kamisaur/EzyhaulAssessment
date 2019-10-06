@@ -32,11 +32,12 @@
 
         <Grid Margin="{StaticResource navBarMargin}">
 
-            <Label Text="Total 20"
+            <Label Text="{Binding ItemsCount}"
                    TextColor="{StaticResource SecondaryTextColor}"
                    HorizontalOptions="Start"
                    VerticalOptions="Center"
                    VerticalTextAlignment="Center"
+                   WidthRequest="100"
                    IsVisible="{Binding ShowToolbarIcons}" />
 
             <Label Text="{Binding TitleName}"

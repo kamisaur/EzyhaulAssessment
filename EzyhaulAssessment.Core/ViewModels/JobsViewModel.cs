@@ -56,6 +56,10 @@ namespace EzyhaulAssessment.Core.ViewModels
             set
             {
                 _offerDetails = value;
+
+                var countMessage = new ItemCountMessage(this, OfferDetails.Count);
+                _messenger.Publish(countMessage);
+
                 RaisePropertyChanged(() => OfferDetails);
             }
         }
@@ -107,6 +111,7 @@ namespace EzyhaulAssessment.Core.ViewModels
 
 
             await GetOfferDetails();
+
         }
 
 
@@ -127,6 +132,7 @@ namespace EzyhaulAssessment.Core.ViewModels
                         CurrentState = State.None;
                     else
                         CurrentState = State.Empty;
+
                 }
                 else
                 {

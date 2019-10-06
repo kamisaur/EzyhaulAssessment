@@ -16,7 +16,19 @@ namespace EzyhaulAssessment.Core.ViewModels
 	{
         IMvxMessenger _messenger;
         private readonly MvxSubscriptionToken _token;
+        private readonly MvxSubscriptionToken _tokenCountMessage;
 
+
+        private string _itemsCount;
+        public string ItemsCount
+        {
+            get => _itemsCount;
+            set
+            {
+                _itemsCount = value;
+                RaisePropertyChanged(() => ItemsCount);
+            }
+        }
 
         private string _titleName;
         public string TitleName
@@ -51,7 +63,13 @@ namespace EzyhaulAssessment.Core.ViewModels
 			ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
             _messenger = messenger;
             _token = _messenger.Subscribe<TitleMessage>(OnTitleMessage);
+            _tokenCountMessage = _messenger.Subscribe<ItemCountMessage>(OnCountMessage);
 
+        }
+
+        private void OnCountMessage(ItemCountMessage obj)
+        {
+            ItemsCount = $"Total {obj.Count}";
         }
 
         private void OnTitleMessage(TitleMessage obj)
