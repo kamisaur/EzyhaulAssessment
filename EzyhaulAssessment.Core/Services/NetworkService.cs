@@ -39,7 +39,7 @@ namespace EzyhaulAssessment.Core.Services
             try
             {
                 var response = await serverApiService.GetJobInfo();
-                //Barrel.Current.Add(key: _baseUrl, data: response, expireIn: TimeSpan.FromMinutes(5));
+                Barrel.Current.Add(key: _baseUrl, data: response, expireIn: TimeSpan.FromMinutes(5));
                 return response;
             }
             catch (Exception)

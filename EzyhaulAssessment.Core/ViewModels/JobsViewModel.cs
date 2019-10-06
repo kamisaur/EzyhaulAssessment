@@ -74,28 +74,10 @@ namespace EzyhaulAssessment.Core.ViewModels
         public async override void ViewAppeared()
         {
             base.ViewAppeared();
-            CurrentState = State.Loading;
-
-
-            //try
-            //{
-            //    CurrentState = State.Loading;
-            //    var service = _networkService.GetApiService();
-            //    OfferDetails = await service.GetJobInfo();
-
-            //    await Items.LoadMoreAsync();
-            //    if (Items.Count > 0)
-            //        CurrentState = State.None;
-            //    else
-            //        CurrentState = State.Empty;
-            //}
-            //catch (Exception ex)
-            //{
-            //    CurrentState = State.Error;
-            //}
-
             try
             {
+                CurrentState = State.Loading;
+
                 OfferDetails = await _networkService.GetOfferDetails();
                 await Items.LoadMoreAsync();
 
@@ -111,22 +93,6 @@ namespace EzyhaulAssessment.Core.ViewModels
         }
 
 
-        //try
-        //{
-        //    CurrentState = State.Loading;
-        //    var service = _networkService.GetApiService();
-        //    OfferDetails = await service.GetJobInfo();
-
-        //    await Items.LoadMoreAsync();
-        //    if(Items.Count > 0)
-        //        CurrentState = State.None;
-        //    else
-        //        CurrentState = State.Empty;
-        //}
-        //catch (Exception ex)
-        //{
-        //    CurrentState = State.Error;
-        //}
 
 
         private async Task<InfiniteScrollCollection<OfferDetail>> PopulateList()
