@@ -12,7 +12,8 @@
                       xmlns:templates="clr-namespace:EzyhaulAssessment.Forms.UI.Templates"
                       mc:Ignorable="d"
                       x:Class="EzyhaulAssessment.Forms.UI.Pages.JobsPage"
-                      Title="Jobs">
+                      Title="Jobs"
+                      BackgroundColor="Gray">
 
     <views:MvxContentPage.IconImageSource>
         <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="{StaticResource BriefcaseIcon}" />
@@ -125,14 +126,14 @@
                               HasUnevenRows="True"
                               SeparatorVisibility="None"
                               VerticalOptions="FillAndExpand"
+                              BackgroundColor="{StaticResource LocationChipColor}"
                               HorizontalOptions="FillAndExpand">
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid>
-                                        <Frame HasShadow="True"
-                                               Margin="15,4"
+                                    <Grid BackgroundColor="Transparent">
+                                        <Frame Margin="15,4"
                                                BackgroundColor="White"
                                                Padding="0"
                                                IsClippedToBounds="True"
@@ -326,6 +327,7 @@
                       ItemSelected="ListView_ItemSelected"
                       HasUnevenRows="True"
                       SeparatorVisibility="None"
+                      BackgroundColor="{StaticResource LocationChipColor}"
                       CachingStrategy="RecycleElement">
                 <ListView.Behaviors>
                     <scroll:InfiniteScrollBehavior IsLoadingMore="{Binding IsWorking}" />
@@ -362,7 +364,8 @@
                                        BackgroundColor="White"
                                        Padding="0"
                                        IsClippedToBounds="True"
-                                       CornerRadius="7">
+                                       CornerRadius="7"
+                                       Style="{StaticResource iOSFrameSpecifics}">
                                     <Grid RowSpacing="0" ColumnSpacing="0">
                                         <!--#region RowDefinitions (5)-->
                                         <Grid.RowDefinitions>
@@ -500,6 +503,8 @@
                                         <CollectionView Grid.Row="4"
                                                         Margin="10,0,0,0"
                                                         HorizontalOptions="FillAndExpand"
+                                                        VerticalScrollBarVisibility="Never"
+                                                        HorizontalScrollBarVisibility="Never"
                                                         ItemTemplate="{StaticResource locationTemSelector}"
                                                         ItemsSource="{Binding locations}">
                                             <CollectionView.ItemsLayout>

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              x:Class="EzyhaulAssessment.Forms.UI.FormsApp">
     <Application.Resources>
 
@@ -49,6 +50,14 @@
         <!--#region Styles-->
         <Style x:Key="IconLabelStyle" TargetType="Label">
             <Setter Property="FontFamily" Value="{StaticResource MaterialFontFamily}" />
+        </Style>
+
+
+        <Style x:Key="iOSFrameSpecifics" TargetType="Frame">
+            <Setter Property="ios:VisualElement.ShadowColor" Value="Black" />
+            <Setter Property="ios:VisualElement.ShadowOpacity" Value="0.4" />
+            <Setter Property="ios:VisualElement.ShadowRadius" Value="1" />
+            <Setter Property="ios:VisualElement.IsShadowEnabled" Value="true" />
         </Style>
         <!--#endregion-->
 

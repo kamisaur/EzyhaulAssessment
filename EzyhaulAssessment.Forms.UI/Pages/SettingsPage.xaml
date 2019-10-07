@@ -9,7 +9,8 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       mc:Ignorable="d"
                       x:Class="EzyhaulAssessment.Forms.UI.Pages.SettingsPage"
-                      Title="Setting">
+                      Title="Setting"
+                      BackgroundColor="{StaticResource LocationChipColor}">
 
     <views:MvxContentPage.IconImageSource>
         <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="{StaticResource SettingsIcon}" />
@@ -54,7 +55,7 @@
         <ScrollView>
             <StackLayout Spacing="10" Padding="15,10">
 
-                <Frame CornerRadius="10">
+                <Frame CornerRadius="10" Style="{StaticResource iOSFrameSpecifics}">
                     <StackLayout Spacing="10">
                         <Label Text="Easy Scroll" Style="{StaticResource TitleLabelStyle}" />
 
@@ -69,14 +70,14 @@
                 </Frame>
 
 
-                <Frame CornerRadius="10">
+                <Frame CornerRadius="10" Style="{StaticResource iOSFrameSpecifics}">
                     <StackLayout Spacing="10">
                         <Label Text="Cache" Style="{StaticResource TitleLabelStyle}" />
 
                         <StackLayout Orientation="Horizontal" Margin="10,0,0,0">
                             <Label Text="Use Cache" Style="{StaticResource LabelStyle}" />
                             <Switch IsToggled="{Binding UseCache}"
-                                    HorizontalOptions="FillAndExpand"
+                                    HorizontalOptions="End"
                                     VerticalOptions="Center" />
                         </StackLayout>
 
@@ -92,7 +93,7 @@
 
 
 
-                <Frame CornerRadius="10">
+                <Frame CornerRadius="10" Style="{StaticResource iOSFrameSpecifics}">
                     <StackLayout Spacing="10">
                         <Label Text="States Test" Style="{StaticResource TitleLabelStyle}" />
 

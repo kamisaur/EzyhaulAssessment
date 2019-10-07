@@ -15,7 +15,9 @@
         </Style>
 
 
-        <Style x:Key="ChipFrameStyle" TargetType="Frame">
+        <Style x:Key="ChipFrameStyle"
+               TargetType="Frame"
+               BasedOn="{StaticResource iOSFrameSpecifics}">
             <Setter Property="Margin" Value="3,0" />
             <Setter Property="Padding" Value="8,1" />
             <Setter Property="HorizontalOptions" Value="Center" />
