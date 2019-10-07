@@ -12,8 +12,7 @@
                       xmlns:templates="clr-namespace:EzyhaulAssessment.Forms.UI.Templates"
                       mc:Ignorable="d"
                       x:Class="EzyhaulAssessment.Forms.UI.Pages.JobsPage"
-                      Title="Jobs"
-                      BackgroundColor="Gray">
+                      Title="Jobs">
 
     <views:MvxContentPage.IconImageSource>
         <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="{StaticResource BriefcaseIcon}" />
@@ -124,9 +123,9 @@
                     <ListView ItemsSource="{StaticResource array}"
                               ItemSelected="ListView_ItemSelected"
                               HasUnevenRows="True"
+                              BackgroundColor="{StaticResource LocationChipColor}"
                               SeparatorVisibility="None"
                               VerticalOptions="FillAndExpand"
-                              BackgroundColor="{StaticResource LocationChipColor}"
                               HorizontalOptions="FillAndExpand">
 
                         <ListView.ItemTemplate>
@@ -297,7 +296,7 @@
                                Style="{StaticResource IconLabelStyle}" />
                         <Label Text="No Jobs available yet."
                                FontSize="20"
-                               TextColor="{StaticResource SecondaryTextColor}"
+                               TextColor="Gray"
                                HorizontalTextAlignment="Center" />
                     </StackLayout>
                 </state:StateView>
@@ -316,7 +315,7 @@
                                Style="{StaticResource IconLabelStyle}" />
                         <Label Text="Ooops... Something went wrong. Please check your internet connection"
                                FontSize="20"
-                               TextColor="{StaticResource SecondaryTextColor}"
+                               TextColor="Gray"
                                HorizontalTextAlignment="Center" />
                     </StackLayout>
                 </state:StateView>
