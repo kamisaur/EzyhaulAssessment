@@ -329,8 +329,7 @@
 
             </state:StateLayout.StateViews>
 
-            <!--  <ListView ItemsSource="{Binding Items}"  -->
-            <ListView ItemsSource="{Binding OfferDetails}"
+            <ListView ItemsSource="{Binding Items}"
                       ItemSelected="ListView_ItemSelected"
                       HasUnevenRows="True"
                       SeparatorVisibility="None"
