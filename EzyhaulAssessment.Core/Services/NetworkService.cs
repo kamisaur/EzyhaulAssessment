@@ -15,17 +15,11 @@ namespace EzyhaulAssessment.Core.Services
         string _baseUrl = "https://carrier-app-api.azurewebsites.net";
         IServerApiService serverApiService;
         IGlobalSettingsService _globalSettingsService;
-		EzyhaulRestService _ezserv;
-		private readonly IMvxLog _log;
 
 
-		public NetworkService(IGlobalSettingsService globalSettingsService, IMvxLogProvider logProvider)
+		public NetworkService(IGlobalSettingsService globalSettingsService)
         {
             _globalSettingsService = globalSettingsService;
-			_log = logProvider.GetLogFor<EzyhaulRestService>();
-
-
-			_ezserv = new EzyhaulRestService(logProvider);
 		}
 
         public IServerApiService GetApiService()
@@ -36,8 +30,6 @@ namespace EzyhaulAssessment.Core.Services
 
         public async Task<List<OfferDetail>> GetOfferDetails()
         {
-
-
             if (_globalSettingsService.UseCache)
             {
                 // get OfferDetails from cache if no internet
@@ -53,17 +45,11 @@ namespace EzyhaulAssessment.Core.Services
             // get OfferDetails form api 
             try
             {
-				var response = await _ezserv.GetJobInfo();
+				serverApiService = RestService.For<IServerApiService>(_baseUrl);
+				var response = await serverApiService.GetJobInfo();
 				Barrel.Current.Add(key: _baseUrl, data: response, expireIn: TimeSpan.FromMinutes(_globalSettingsService.CacheExpiry));
-                return response;
-
-
-
-				//serverApiService = RestService.For<IServerApiService>(_baseUrl);
-    //            var response = await serverApiService.GetJobInfo();
-				//Barrel.Current.Add(key: _baseUrl, data: response, expireIn: TimeSpan.FromMinutes(_globalSettingsService.CacheExpiry));
-    //            return response;
-            }
+				return response;
+			}
             catch (Exception)
             {
                 return null;
@@ -71,9 +57,5 @@ namespace EzyhaulAssessment.Core.Services
             }
         }
 
-
-
-
     }
-
 }
