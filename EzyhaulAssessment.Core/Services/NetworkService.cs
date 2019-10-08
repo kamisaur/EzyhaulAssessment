@@ -29,7 +29,6 @@ namespace EzyhaulAssessment.Core.Services
 
         public async Task<List<OfferDetail>> GetOfferDetails()
         {
-            serverApiService = RestService.For<IServerApiService>(_baseUrl);
 
 
             if (_globalSettingsService.UseCache)
@@ -47,8 +46,9 @@ namespace EzyhaulAssessment.Core.Services
             // get OfferDetails form api 
             try
             {
+				serverApiService = RestService.For<IServerApiService>(_baseUrl);
                 var response = await serverApiService.GetJobInfo();
-                Barrel.Current.Add(key: _baseUrl, data: response, expireIn: TimeSpan.FromMinutes(_globalSettingsService.CacheExpiry));
+				Barrel.Current.Add(key: _baseUrl, data: response, expireIn: TimeSpan.FromMinutes(_globalSettingsService.CacheExpiry));
                 return response;
             }
             catch (Exception)
