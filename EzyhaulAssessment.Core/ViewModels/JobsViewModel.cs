@@ -49,7 +49,19 @@ namespace EzyhaulAssessment.Core.ViewModels
         }
 
 
-        private List<OfferDetail> _offerDetails;
+		private string _exMessage;
+		public string ExMessage
+		{
+			get => _exMessage;
+			set
+			{
+				_exMessage = value;
+				RaisePropertyChanged(() => ExMessage);
+			}
+		}
+
+
+		private List<OfferDetail> _offerDetails;
         public List<OfferDetail> OfferDetails
         {
             get => _offerDetails;

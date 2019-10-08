@@ -313,16 +313,21 @@
                                VerticalTextAlignment="Center"
                                TextColor="{StaticResource PrimaryColor}"
                                Style="{StaticResource IconLabelStyle}" />
-                        <Label Text="Ooops... Something went wrong. Please check your internet connection"
-                               FontSize="20"
+                        <Label Text="{Binding ExMessage}"
+                               FontSize="12"
                                TextColor="Gray"
                                HorizontalTextAlignment="Center" />
+                        <!--<Label Text="Ooops... Something went wrong. Please check your internet connection"
+                               FontSize="20"
+                               TextColor="Gray"
+                               HorizontalTextAlignment="Center" />-->
                     </StackLayout>
                 </state:StateView>
 
             </state:StateLayout.StateViews>
 
-            <ListView ItemsSource="{Binding Items}"
+            <!--  <ListView ItemsSource="{Binding Items}"  -->
+            <ListView ItemsSource="{Binding OfferDetails}"
                       ItemSelected="ListView_ItemSelected"
                       HasUnevenRows="True"
                       SeparatorVisibility="None"
