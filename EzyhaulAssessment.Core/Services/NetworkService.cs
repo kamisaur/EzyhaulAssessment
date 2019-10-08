@@ -1,5 +1,6 @@
 ﻿using EzyhaulAssessment.Core.Models;
 using MonkeyCache.SQLite;
+using MvvmCross.Logging;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,16 @@ namespace EzyhaulAssessment.Core.Services
         IServerApiService serverApiService;
         IGlobalSettingsService _globalSettingsService;
 		EzyhaulRestService _ezserv;
+		private readonly IMvxLog _log;
 
 
-		public NetworkService(IGlobalSettingsService globalSettingsService)
+		public NetworkService(IGlobalSettingsService globalSettingsService, IMvxLogProvider logProvider)
         {
             _globalSettingsService = globalSettingsService;
+			_log = logProvider.GetLogFor<EzyhaulRestService>();
 
 
-			_ezserv = new EzyhaulRestService();
+			_ezserv = new EzyhaulRestService(logProvider);
 		}
 
         public IServerApiService GetApiService()
