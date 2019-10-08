@@ -14,12 +14,16 @@ namespace EzyhaulAssessment.Core.Services
         string _baseUrl = "https://carrier-app-api.azurewebsites.net";
         IServerApiService serverApiService;
         IGlobalSettingsService _globalSettingsService;
+		EzyhaulRestService _ezserv;
 
 
-        public NetworkService(IGlobalSettingsService globalSettingsService)
+		public NetworkService(IGlobalSettingsService globalSettingsService)
         {
             _globalSettingsService = globalSettingsService;
-        }
+
+
+			_ezserv = new EzyhaulRestService();
+		}
 
         public IServerApiService GetApiService()
         {
@@ -46,10 +50,16 @@ namespace EzyhaulAssessment.Core.Services
             // get OfferDetails form api 
             try
             {
-				serverApiService = RestService.For<IServerApiService>(_baseUrl);
-                var response = await serverApiService.GetJobInfo();
+				var response = await _ezserv.GetJobInfo();
 				Barrel.Current.Add(key: _baseUrl, data: response, expireIn: TimeSpan.FromMinutes(_globalSettingsService.CacheExpiry));
                 return response;
+
+
+
+				//serverApiService = RestService.For<IServerApiService>(_baseUrl);
+    //            var response = await serverApiService.GetJobInfo();
+				//Barrel.Current.Add(key: _baseUrl, data: response, expireIn: TimeSpan.FromMinutes(_globalSettingsService.CacheExpiry));
+    //            return response;
             }
             catch (Exception)
             {
