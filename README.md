@@ -1,7 +1,5 @@
 # EzyhaulAssessment
 
-A Xamarin.Forms implementation of Ezyhaul Job offers UI. 
-The app fetches data from api
 
 <html>
   <table style="width:100%">
@@ -13,10 +11,13 @@ The app fetches data from api
 </html>
 
 
+A Xamarin.Forms implementation of Ezyhaul Job offers UI. 
+The app fetches data from api
+
 ```
 https://carrier-app-api.azurewebsites.net/api/data/offers?code=UwwoqV/ZrIXiUVZbvpRhCgxiujKqrAfSMxWkGGndjmJW8UOWD5xEvg==
 ```
-Caching is implemented to load localy saved data if there is no internet connection
+Caching is implemented to load localy saved data if there is no internet connection.
 
 
 
