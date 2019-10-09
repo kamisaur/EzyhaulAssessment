@@ -3,6 +3,9 @@
 A Xamarin.Forms implementation of Ezyhaul Job offers UI. 
 The app fetches data from api
 
+<img src="https://github.com/kamisaur/EzyhaulAssessment/blob/master/Images/android_screenrecording.gif" width="400px" />
+
+
 ```
 https://carrier-app-api.azurewebsites.net/api/data/offers?code=UwwoqV/ZrIXiUVZbvpRhCgxiujKqrAfSMxWkGGndjmJW8UOWD5xEvg==
 ```
