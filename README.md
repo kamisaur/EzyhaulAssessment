@@ -3,7 +3,14 @@
 A Xamarin.Forms implementation of Ezyhaul Job offers UI. 
 The app fetches data from api
 
-<img src="https://github.com/kamisaur/EzyhaulAssessment/blob/master/Images/android_screenrecording.gif" width="400px" />
+<html>
+  <table style="width:100%">
+    <tr>
+      <td><img src="https://github.com/kamisaur/EzyhaulAssessment/blob/master/Images/android_screenrecording.gif" width="400px"></td>
+      <td><img src="https://github.com/kamisaur/EzyhaulAssessment/blob/master/Images/ios_screenrecording.gif" width="400px"></td>
+    </tr>
+  </table>
+</html>
 
 
 ```
@@ -24,5 +31,6 @@ Refit                                       4.7.51
 Xamarin.Forms.StateSquid                    1.0.6
 Xamarin.Forms.Extended.InfiniteScrolling    1.0.0-preview2
 ```
+
 
 
